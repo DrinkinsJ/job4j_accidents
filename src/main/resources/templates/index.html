@@ -48,12 +48,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="accident : ${accidents}">
-                    <td th:text="${accident.id}" />
-                    <td th:text="${accident.name}" />
-                    <td th:text="${accident.text}" />
-                    <td th:text="${accident.address}" />
-                    <td><a th:href="@{/editAccident/{id}(id=${accident.id})}"
-                           class="btn btn-primary me-md-2" type="button">Edit</a></td>
+                    <td th:text="${accident.id}"/>
+                    <td th:text="${accident.name}"/>
+                    <td th:text="${accident.text}"/>
+                    <td th:text="${accident.address}"/>
+                    <td><a class="btn btn-primary me-md-2"
+                           th:href="@{/editAccident/{id}(id=${accident.id})}" type="button">Edit</a></td>
                 </tr>
                 </tbody>
             </table>

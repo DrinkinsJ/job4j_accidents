@@ -34,22 +34,22 @@
                 New accident
             </div>
             <div class="card-body">
-                <form th:action="@{/saveAccident}" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="0"/>
+                <form enctype="multipart/form-data" method="POST" th:action="@{/saveAccident}">
+                    <input name="id" type="hidden" value="0"/>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input class="form-control" id="name" name="name" type="text">
                     </div>
                     <div class="mb-3 text-wrap">
-                        <label for="text" class="form-label"><b>Description</b></label>
-                        <textarea class="form-control" id="text" name="text" rows="6" placeholder="Описание"></textarea>
+                        <label class="form-label" for="text"><b>Description</b></label>
+                        <textarea class="form-control" id="text" name="text" placeholder="Описание" rows="6"></textarea>
                     </div>
                     <div class="mb-3 text-wrap">
-                        <label for="address" class="form-label"><b>Address</b></label>
-                        <textarea class="form-control" id="address" name="address" rows="2"
-                                  placeholder="Адрес"></textarea>
+                        <label class="form-label" for="address"><b>Address</b></label>
+                        <textarea class="form-control" id="address" name="address" placeholder="Адрес"
+                                  rows="2"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    <button class="btn btn-primary mt-3" type="submit">Save</button>
                 </form>
             </div>
         </div>
