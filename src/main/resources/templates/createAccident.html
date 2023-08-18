@@ -42,12 +42,21 @@
                     </div>
                     <div class="mb-3 text-wrap">
                         <label class="form-label" for="text"><b>Description</b></label>
-                        <textarea class="form-control" id="text" name="text" placeholder="Описание" rows="6"></textarea>
+                        <textarea class="form-control" id="text" name="text" placeholder="description"
+                                  rows="4"></textarea>
                     </div>
                     <div class="mb-3 text-wrap">
                         <label class="form-label" for="address"><b>Address</b></label>
-                        <textarea class="form-control" id="address" name="address" placeholder="Адрес"
+                        <textarea class="form-control" id="address" name="address" placeholder="address"
                                   rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="accidentType.id">Type</label>
+                        <select class="form-control" id="accidentType.id" name="accidentType.id">
+                            <option th:each="accidentType: ${accidentTypes}"
+                                    th:text="${accidentType.name}"
+                                    th:value="${accidentType.id}"></option>
+                        </select>
                     </div>
                     <button class="btn btn-primary mt-3" type="submit">Save</button>
                 </form>

@@ -50,6 +50,14 @@
                         <textarea class="form-control" id="address" name="address" placeholder="Адрес"
                                   rows="2"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="accidentType.id">Type</label>
+                        <select class="form-control" id="accidentType.id" name="accidentType.id">
+                            <option th:each="accidentType: ${accidentTypes}"
+                                    th:text="${accidentType.name}"
+                                    th:value="${accidentType.id}"></option>
+                        </select>
+                    </div>
                     <button class="btn btn-primary mt-3" type="submit">Save</button>
                 </form>
             </div>

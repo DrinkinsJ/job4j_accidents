@@ -1,6 +1,7 @@
 package com.job4j.accidents.repository;
 
 import com.job4j.accidents.model.Accident;
+import com.job4j.accidents.model.AccidentType;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -16,9 +17,9 @@ public class MemAccidentRepository implements AccidentRepository {
     Map<Integer, Accident> repository = new ConcurrentHashMap<>();
 
     public MemAccidentRepository() {
-        create(new Accident(1, "Name 1", "Text 1", "Address 1"));
-        create(new Accident(1, "Name 2", "Text 2", "Address 2"));
-        create(new Accident(1, "Name 2", "Text 3", "Address 3"));
+        create(new Accident(1, "Name 1", "Text 1", "Address 1", new AccidentType(1, "Test")));
+        create(new Accident(1, "Name 2", "Text 2", "Address 2", new AccidentType(1, "Test")));
+        create(new Accident(1, "Name 2", "Text 3", "Address 3", new AccidentType(1, "Test")));
     }
 
     @Override
