@@ -24,11 +24,16 @@
                 <div class="navbar-nav me-auto">
                     <a class="nav-item nav-link active" th:href="@{/index}">All accidents</a>
                 </div>
+                <li class="nav-item ml-lg-2 d-flex justify-content-end align-items-center text-white">
+                    <div th:text="${user}"></div>
+                </li>
             </div>
         </div>
+
     </nav>
 
     <div class="container mt-2">
+
         <div class=container>
             <head>
                 <title>Traffic Offenders Project</title>
