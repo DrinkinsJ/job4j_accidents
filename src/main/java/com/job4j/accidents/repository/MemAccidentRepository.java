@@ -24,7 +24,9 @@ public class MemAccidentRepository implements AccidentRepository {
 
     @Override
     public Accident create(Accident accident) {
-        return repository.put(nextId.incrementAndGet(), accident);
+        int id = nextId.incrementAndGet();
+        accident.setId(id);
+        return repository.put(id, accident);
     }
 
     @Override
