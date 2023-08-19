@@ -43,12 +43,10 @@ public class AccidentController {
     }
 
     @PostMapping("/editAccident")
-    public String update(@ModelAttribute Accident accident, @RequestParam("accidentType.id") int typeId) {
-        var optionalAccidentType = accidentTypeService.findById(typeId);
-        if (optionalAccidentType.isPresent()) {
-            accident.setAccidentType(optionalAccidentType.get());
-            accidentService.update(accident);
-        }
+    public String update(@ModelAttribute Accident accident) {
+        int typeId = accident.getAccidentType().getId();
+        accident.setAccidentType(accidentTypeService.findById(typeId).orElseThrow());
+        accidentService.update(accident);
         return "redirect:/";
     }
 }

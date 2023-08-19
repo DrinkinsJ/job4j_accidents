@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MemAccidentTypeRepository implements AccidentTypeRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);
-    Map<Integer, AccidentType> repository = new ConcurrentHashMap<>();
+    private final Map<Integer, AccidentType> repository = new ConcurrentHashMap<>();
 
 
     public MemAccidentTypeRepository() {
