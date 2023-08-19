@@ -58,6 +58,16 @@
                                     th:value="${accidentType.id}"></option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="rIds" name="rIds">Rules</label>
+                        <select class="form-control" id="rIds" name="rIds" multiple>
+                            <option th:each="rule: ${rules}"
+                                    th:text="${rule.name}"
+                                    th:value="${rule.id}"></option>
+                        </select>
+                    </div>
+
                     <button class="btn btn-primary mt-3" type="submit">Save</button>
                 </form>
             </div>
