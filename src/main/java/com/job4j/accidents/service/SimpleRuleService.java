@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +33,11 @@ public class SimpleRuleService implements RuleService {
     @Override
     public Optional<Rule> findById(int id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Set<Rule> findByIds(int[] ids) {
+        return repository.findByIds(ids);
     }
 
     @Override

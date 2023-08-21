@@ -63,6 +63,17 @@ public class MemRuleRepository implements RuleRepository {
         return optionalRule;
     }
 
+    public Set<Rule> findByIds(int[] ids) {
+        Set<Rule> rules = new HashSet<>();
+        Arrays.stream(ids)
+                .forEach(targetId -> {
+                    repository.stream()
+                            .filter(rule -> rule.getId() == targetId)
+                            .forEach(rules::add);
+                });
+        return rules;
+    }
+
     @Override
     public Collection<Rule> findAll() {
         return repository.stream().toList();
