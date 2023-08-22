@@ -4,4 +4,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <include file="scripts/001_ddl_create_accidents_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/002_dml_insert_into accident_type.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/003_dml_insert_into rule.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_dml_insert_into_accident.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_dml_insert_into_accident_rule.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
