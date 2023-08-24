@@ -13,10 +13,6 @@ public interface JdbcAccidentService {
     boolean update(Accident accident, int[] ids);
     boolean delete(int id);
     List<Accident> findAll();
-
-    List<AccidentType> findTypes();
-    List<Rule> findRules();
-
-    public Optional<Accident> findById(int id);
+    Optional<Accident> findById(int id);
 
 }

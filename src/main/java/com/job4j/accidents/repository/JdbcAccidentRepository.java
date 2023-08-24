@@ -44,9 +44,6 @@ public class JdbcAccidentRepository {
                      LEFT JOIN rule r ON ar.rule_id = r.id
                             """;
 
-    private static final String SELECT_ALL_RULE_QUERY = "SELECT id, name FROM Rule";
-
-    private static final String SELECT_ALL_ACCIDENT_TYPE_QUERY = "SELECT id, name FROM accident_type";
     private static final String SELECT_ACCIDENT_RULE_QUERY = """
             SELECT r.id AS rule_id, r.name AS r_name
             FROM rule r
@@ -69,7 +66,7 @@ public class JdbcAccidentRepository {
             preparedStatement.setString(1, accident.getName());
             preparedStatement.setString(2, accident.getText());
             preparedStatement.setString(3, accident.getAddress());
-            preparedStatement.setInt(4, accident.getAccidentType().getId());
+            preparedStatement.setInt(4, accident.getType().getId());
             return preparedStatement;
         }, keyHolder);
         var keys = keyHolder.getKeyList();
@@ -86,7 +83,7 @@ public class JdbcAccidentRepository {
                 accident.getName(),
                 accident.getText(),
                 accident.getAddress(),
-                accident.getAccidentType().getId(),
+                accident.getType().getId(),
                 accident.getId()) > 0;
         Arrays.stream(ids).forEach(i -> jdbc.update(INSERT_RULE_QUERY, accident.getId(), i));
         return isUpdated;
@@ -113,7 +110,7 @@ public class JdbcAccidentRepository {
                         AccidentType accidentType = new AccidentType();
                         accidentType.setId(resultSet.getInt("at_id"));
                         accidentType.setName(resultSet.getString("at_name"));
-                        newAccident.setAccidentType(accidentType);
+                        newAccident.setType(accidentType);
                         newAccident.setRules(new HashSet<>());
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -144,7 +141,7 @@ public class JdbcAccidentRepository {
                     AccidentType type = new AccidentType();
                     type.setId(rs.getInt("at_id"));
                     type.setName(rs.getString("at_name"));
-                    accident.setAccidentType(type);
+                    accident.setType(type);
                     return accident;
                 });
 
@@ -160,31 +157,5 @@ public class JdbcAccidentRepository {
 
 
         return Optional.of(accident);
-    }
-
-    public List<Rule> findRules() {
-        List<Rule> rules = new ArrayList<>();
-        jdbc.query(SELECT_ALL_RULE_QUERY, resultSet -> {
-            do {
-                Rule rule = new Rule();
-                rule.setId(resultSet.getInt("id"));
-                rule.setName(resultSet.getString("name"));
-                rules.add(rule);
-            } while (resultSet.next());
-        });
-        return rules;
-    }
-
-    public List<AccidentType> findTypes() {
-        List<AccidentType> types = new ArrayList<>();
-        jdbc.query(SELECT_ALL_ACCIDENT_TYPE_QUERY, resultSet -> {
-            do {
-                AccidentType type = new AccidentType();
-                type.setId(resultSet.getInt("id"));
-                type.setName(resultSet.getString("name"));
-                types.add(type);
-            } while (resultSet.next());
-        });
-        return types;
     }
 }
