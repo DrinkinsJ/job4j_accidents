@@ -44,12 +44,12 @@ public class JdbcAccidentRepository {
                      LEFT JOIN rule r ON ar.rule_id = r.id
                             """;
 
-    private static final String SELECT_ACCIDENT_RULE_QUERY = """
-            SELECT r.id AS rule_id, r.name AS r_name
-            FROM rule r
-                     JOIN accident_rule ar ON r.id = ar.rule_id
-            WHERE ar.accident_id = ?
-            """;
+        private static final String SELECT_ACCIDENT_RULE_QUERY = """
+                SELECT r.id AS rule_id, r.name AS r_name
+                FROM rule r
+                         JOIN accident_rule ar ON r.id = ar.rule_id
+                WHERE ar.accident_id = ?
+                """;
     private static final String SELECT_ACCIDENT_BY_ID_QUERY = """
             SELECT a.id, a.name AS a_name, a.text, a.address, at.id AS at_id, at.name AS at_name
             FROM accident a

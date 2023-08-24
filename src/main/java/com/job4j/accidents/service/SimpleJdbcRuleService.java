@@ -14,6 +14,6 @@ public class SimpleJdbcRuleService {
     private final JdbcRuleRepository repository;
 
     public Collection<Rule> findAll(){
-        return repository.finaAll();
+        return repository.findAll();
     }
 }

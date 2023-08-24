@@ -15,7 +15,7 @@ public class JdbcRuleRepository {
 
     private final JdbcTemplate jdbc;
 
-    public List<Rule> finaAll() {
+    public List<Rule> findAll() {
         List<Rule> rules = new ArrayList<>();
         jdbc.query(SELECT_ALL_RULE_QUERY, resultSet -> {
             do {

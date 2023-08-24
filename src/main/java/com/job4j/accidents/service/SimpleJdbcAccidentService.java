@@ -1,20 +1,18 @@
 package com.job4j.accidents.service;
 
 import com.job4j.accidents.model.Accident;
-import com.job4j.accidents.model.AccidentType;
-import com.job4j.accidents.model.Rule;
 import com.job4j.accidents.repository.JdbcAccidentRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-@Repository
+@Service
 public class SimpleJdbcAccidentService implements JdbcAccidentService {
 
-    JdbcAccidentRepository repository;
+    private final JdbcAccidentRepository repository;
 
 
     @Override
@@ -35,16 +33,6 @@ public class SimpleJdbcAccidentService implements JdbcAccidentService {
     @Override
     public List<Accident> findAll() {
         return repository.findAll();
-    }
-
-    @Override
-    public List<AccidentType> findTypes() {
-        return repository.findTypes();
-    }
-
-    @Override
-    public List<Rule> findRules() {
-        return repository.findRules();
     }
 
     @Override
