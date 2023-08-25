@@ -54,7 +54,7 @@
                     <td th:text="${accident.name}"/>
                     <td th:text="${accident.text}"/>
                     <td th:text="${accident.address}"/>
-                    <td th:text="${accident.accidentType.name}"/>
+                    <td th:text="${accident.type.name}"/>
                     <td>
                         <ul>
                             <li th:each="rule : ${accident.rules}" th:text="${rule.name}"></li>

@@ -1,7 +1,7 @@
 package com.job4j.accidents.service;
 
 import com.job4j.accidents.model.Accident;
-import com.job4j.accidents.repository.AccidentRepository;
+import com.job4j.accidents.repository.MemAccidentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class SimpleAccidentService implements AccidentService {
+public class MemAccidentService implements AccidentService {
 
-    private final AccidentRepository repository;
+    private final MemAccidentRepository repository;
 
     @Override
     public Accident create(Accident accident) {

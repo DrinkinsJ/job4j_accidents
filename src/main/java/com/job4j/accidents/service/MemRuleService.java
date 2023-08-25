@@ -1,7 +1,7 @@
 package com.job4j.accidents.service;
 
 import com.job4j.accidents.model.Rule;
-import com.job4j.accidents.repository.RuleRepository;
+import com.job4j.accidents.repository.MemRuleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-public class SimpleRuleService implements RuleService {
+public class MemRuleService implements RuleService {
 
-    private final RuleRepository repository;
+    private final MemRuleRepository repository;
 
     @Override
     public Rule create(Rule rule) {

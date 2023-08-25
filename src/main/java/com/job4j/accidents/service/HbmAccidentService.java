@@ -1,18 +1,20 @@
 package com.job4j.accidents.service;
 
 import com.job4j.accidents.model.Accident;
-import com.job4j.accidents.repository.JdbcAccidentRepository;
+import com.job4j.accidents.repository.HbmAccidentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
-public class JdbcAccidentService implements AccidentService {
+@AllArgsConstructor
+@Primary
+public class HbmAccidentService implements AccidentService {
 
-    private final JdbcAccidentRepository repository;
+    private final HbmAccidentRepository repository;
 
     @Override
     public Accident create(Accident accident) {
@@ -30,12 +32,12 @@ public class JdbcAccidentService implements AccidentService {
     }
 
     @Override
-    public List<Accident> findAll() {
-        return repository.findAll();
+    public Optional<Accident> findById(int id) {
+        return repository.findById(id);
     }
 
     @Override
-    public Optional<Accident> findById(int id) {
-        return repository.findById(id);
+    public Collection<Accident> findAll() {
+        return repository.findAll();
     }
 }

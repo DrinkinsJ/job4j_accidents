@@ -16,10 +16,12 @@ import java.util.*;
 
 @AllArgsConstructor
 @Repository
-public class JdbcAccidentRepository {
+public class JdbcAccidentRepository implements AccidentRepository {
 
     private static final String INSERT_ACCIDENT_QUERY = "INSERT INTO accident (name, text, address, accident_type_id) VALUES (?, ?, ?, ?)";
+
     private static final String INSERT_RULE_QUERY = "INSERT INTO accident_rule (accident_id, rule_id) VALUES (?, ?)";
+
     private static final String DELETE_RULE_QUERY = "DELETE FROM accident_rule where accident_id = ?";
 
     private static final String DELETE_ACCIDENT_BY_ID_QUERY = "DELETE FROM accident WHERE id = ?";
@@ -44,12 +46,12 @@ public class JdbcAccidentRepository {
                      LEFT JOIN rule r ON ar.rule_id = r.id
                             """;
 
-        private static final String SELECT_ACCIDENT_RULE_QUERY = """
-                SELECT r.id AS rule_id, r.name AS r_name
-                FROM rule r
-                         JOIN accident_rule ar ON r.id = ar.rule_id
-                WHERE ar.accident_id = ?
-                """;
+    private static final String SELECT_ACCIDENT_RULE_QUERY = """
+            SELECT r.id AS rule_id, r.name AS r_name
+            FROM rule r
+                     JOIN accident_rule ar ON r.id = ar.rule_id
+            WHERE ar.accident_id = ?
+            """;
     private static final String SELECT_ACCIDENT_BY_ID_QUERY = """
             SELECT a.id, a.name AS a_name, a.text, a.address, at.id AS at_id, at.name AS at_name
             FROM accident a
@@ -59,7 +61,7 @@ public class JdbcAccidentRepository {
 
     private final JdbcTemplate jdbc;
 
-    public Accident create(Accident accident, int[] ids) {
+    public Accident create(Accident accident) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbc.update(con -> {
             PreparedStatement preparedStatement = con.prepareStatement(INSERT_ACCIDENT_QUERY, Statement.RETURN_GENERATED_KEYS);
@@ -72,12 +74,12 @@ public class JdbcAccidentRepository {
         var keys = keyHolder.getKeyList();
         int generatedId = (int) keys.get(0).get("id");
         accident.setId(generatedId);
-
+        int[] ids = accident.getRules().stream().mapToInt(Rule::getId).toArray();
         Arrays.stream(ids).forEach(i -> jdbc.update(INSERT_RULE_QUERY, accident.getId(), i));
         return accident;
     }
 
-    public boolean update(Accident accident, int[] ids) {
+    public boolean update(Accident accident) {
         jdbc.update(DELETE_RULE_QUERY, accident.getId());
         boolean isUpdated = jdbc.update(UPDATE_ACCIDENT_QUERY,
                 accident.getName(),
@@ -85,15 +87,15 @@ public class JdbcAccidentRepository {
                 accident.getAddress(),
                 accident.getType().getId(),
                 accident.getId()) > 0;
+        int[] ids = accident.getRules().stream().mapToInt(Rule::getId).toArray();
         Arrays.stream(ids).forEach(i -> jdbc.update(INSERT_RULE_QUERY, accident.getId(), i));
         return isUpdated;
     }
 
-    public boolean delete(int id) {
+    public boolean deleteById(int id) {
         jdbc.update(DELETE_RULE_QUERY, id);
         return jdbc.update(DELETE_ACCIDENT_BY_ID_QUERY, id) > 0;
     }
-
 
     public List<Accident> findAll() {
         Map<Integer, Accident> accidentsMap = new HashMap<>();

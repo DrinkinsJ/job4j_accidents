@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MemAccidentRepository implements AccidentRepository {
-
     private final AtomicInteger nextId = new AtomicInteger(0);
     private final Map<Integer, Accident> repository = new ConcurrentHashMap<>();
 
@@ -29,7 +28,7 @@ public class MemAccidentRepository implements AccidentRepository {
                 .name("Name 1")
                 .text("Text 1")
                 .address("Address 1")
-                .accidentType(type)
+                .type(type)
                 .rules(Set.of(rule1, rule2))
                 .build());
 
@@ -38,7 +37,7 @@ public class MemAccidentRepository implements AccidentRepository {
                 .name("Name 2")
                 .text("Text 2")
                 .address("Address 2")
-                .accidentType(type)
+                .type(type)
                 .rules(Set.of(rule1, rule2))
                 .build());
 
@@ -47,7 +46,7 @@ public class MemAccidentRepository implements AccidentRepository {
                 .name("Name 3")
                 .text("Text 3")
                 .address("Address 3")
-                .accidentType(type)
+                .type(type)
                 .rules(Set.of(rule1, rule2))
                 .build());
     }

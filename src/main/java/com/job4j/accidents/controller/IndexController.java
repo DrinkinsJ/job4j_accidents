@@ -1,6 +1,6 @@
 package com.job4j.accidents.controller;
 
-import com.job4j.accidents.repository.HbmAccidentRepository;
+import com.job4j.accidents.service.AccidentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class IndexController {
 
-    private final HbmAccidentRepository accidentService;
+    private final AccidentService accidentService;
 
     @GetMapping({"/", "/index"})
     public String getIndex(Model model) {

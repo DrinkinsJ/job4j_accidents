@@ -1,7 +1,7 @@
 package com.job4j.accidents.service;
 
 import com.job4j.accidents.model.AccidentType;
-import com.job4j.accidents.repository.AccidentTypeRepository;
+import com.job4j.accidents.repository.JdbcAccidentTypeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,23 +10,23 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class SimpleAccidentTypeService implements AccidentTypeService {
+public class JdbcAccidentTypeService implements AccidentTypeService {
 
-    private final AccidentTypeRepository repository;
+    private final JdbcAccidentTypeRepository repository;
 
     @Override
     public AccidentType create(AccidentType accidentType) {
-        return repository.create(accidentType);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean update(AccidentType accidentType) {
-        return repository.update(accidentType);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean deleteById(int id) {
-        return repository.deleteById(id);
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -34,7 +34,6 @@ public class SimpleAccidentTypeService implements AccidentTypeService {
         return repository.findById(id);
     }
 
-    @Override
     public Collection<AccidentType> findAll() {
         return repository.findAll();
     }

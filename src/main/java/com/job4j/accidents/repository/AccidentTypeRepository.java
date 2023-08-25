@@ -7,12 +7,8 @@ import java.util.Optional;
 
 public interface AccidentTypeRepository {
     AccidentType create(AccidentType accidentType);
-
     boolean update(AccidentType accidentType);
-
     boolean deleteById(int id);
-
     Optional<AccidentType> findById(int id);
-
     Collection<AccidentType> findAll();
 }
