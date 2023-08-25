@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
-@Primary
 public class HbmRuleService implements RuleService {
     private final HbmRuleRepository repository;
 

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-@Primary
 public class HbmAccidentTypeService implements AccidentTypeService {
 
     private final HbmAccidentTypeRepository repository;
