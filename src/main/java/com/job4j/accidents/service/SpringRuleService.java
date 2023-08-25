@@ -45,11 +45,11 @@ public class SpringRuleService implements RuleService {
 
     @Override
     public Set<Rule> findByIds(int[] ids) {
-        var IterRules = repository.findAllById(Arrays.asList(Arrays.stream(ids)
+        var iterRules = repository.findAllById(Arrays.asList(Arrays.stream(ids)
                 .boxed()
                 .toArray(Integer[]::new)));
         Set<Rule> rules = new HashSet<>();
-        IterRules.forEach(rules::add);
+        iterRules.forEach(rules::add);
         return rules;
     }
 
