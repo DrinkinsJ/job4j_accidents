@@ -24,17 +24,15 @@
                 <div class="navbar-nav me-auto">
                     <a class="nav-item nav-link active" th:href="@{/index}">All accidents</a>
                     <a class="nav-item nav-link active" th:href="@{/createAccident}">Create accident</a>
+                    <a class="nav-item nav-link active" th:href="@{/reg}">Reg</a>
+                    <a class="nav-item nav-link active" th:href="@{/login}">Login</a>
                 </div>
                 <li class="nav-item ml-lg-2 d-flex justify-content-end align-items-center text-white">
-                    <div th:text="${user}"></div>
+                    <div th:text="${user.username}"></div>
                 </li>
             </div>
         </div>
     </nav>
-
-    <div>
-        Login as : ${user.username}
-    </div>
 
     <div class="row mb-3"></div>
     <div class="container">
