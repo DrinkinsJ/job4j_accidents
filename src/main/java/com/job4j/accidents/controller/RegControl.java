@@ -1,13 +1,14 @@
 package com.job4j.accidents.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import com.job4j.accidents.model.User;
 import com.job4j.accidents.repository.AuthorityRepository;
 import com.job4j.accidents.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RegControl {
@@ -23,7 +24,12 @@ public class RegControl {
     }
 
     @PostMapping("/reg")
-    public String regSave(@ModelAttribute User user) {
+    public String regSave(@ModelAttribute User user, Model model) {
+        if (users.findUserByUsername(user.getUsername()).isPresent()) {
+            String errorMessage = "User already exist";
+            model.addAttribute("errorMessage", errorMessage);
+            return "reg";
+        }
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
