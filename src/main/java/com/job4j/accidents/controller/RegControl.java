@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Optional;
-
 @Controller
 @AllArgsConstructor
 public class RegControl {
@@ -24,16 +22,15 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user, Model model) {
-        if (users.save(user).isEmpty()) {
-            String errorMessage = "User already exist";
-            model.addAttribute("errorMessage", errorMessage);
-            return "reg";
-        }
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        users.save(user);
-        return "redirect:/login";
+        if (users.save(user).isPresent()) {
+            return "redirect:/login";
+        }
+        String errorMessage = "User already exist";
+        model.addAttribute("errorMessage", errorMessage);
+        return "reg";
     }
 
     @GetMapping("/reg")
