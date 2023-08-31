@@ -10,8 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(classes = Job4jAccidentsApplication.class)
 @AutoConfigureMockMvc
@@ -23,7 +22,7 @@ public class LoginControllerTest {
 
     @Test
     @WithMockUser
-    public void shouldReturnLoginPage() throws Exception {
+    public void shouldReturnDefaultMessageLoginPage() throws Exception {
         this.mockMvc.perform(get("/login"))
                 .andDo(print())
                 .andExpect(status().isOk())

@@ -24,7 +24,7 @@ public class IndexControllerTest {
 
     @Test
     @WithMockUser
-    public void shouldReturnDefaultMessage() throws Exception {
+    public void shouldReturnDefaultMessageIndexPage() throws Exception {
         this.mockMvc.perform(get("/index"))
                 .andDo(print())
                 .andExpect(status().isOk())
